@@ -1,10 +1,12 @@
 
 import { useState, useEffect } from 'react';
 import { CinematicEntrance } from '@/components/CinematicEntrance';
-import { HeroSection } from '@/components/HeroSection';
+import { EnhancedHeroSection } from '@/components/EnhancedHeroSection';
 import { FloatingNav } from '@/components/FloatingNav';
 import { WisdomOrb } from '@/components/WisdomOrb';
 import { DadStats } from '@/components/DadStats';
+import { ModernCounters } from '@/components/ModernCounters';
+import { EnhancedFooter } from '@/components/EnhancedFooter';
 import { OnboardingTooltips } from '@/components/OnboardingTooltips';
 
 const Index = () => {
@@ -40,20 +42,10 @@ const Index = () => {
         <DadStats />
       </div>
       
-      <HeroSection />
+      <EnhancedHeroSection />
+      <ModernCounters />
       <OnboardingTooltips />
-      
-      {/* Minimized Footer */}
-      <footer className="bg-gray-900 text-white py-4">
-        <div className="container mx-auto px-6 text-center">
-          <h3 className="font-playfair text-lg font-bold mb-1">
-            Rick Lupo
-          </h3>
-          <p className="text-xs text-gray-500">
-            "I can't believe how much web hosting costs these days!"
-          </p>
-        </div>
-      </footer>
+      <EnhancedFooter />
     </div>
   );
 };
