@@ -5,6 +5,7 @@ import { HeroSection } from '@/components/HeroSection';
 import { FloatingNav } from '@/components/FloatingNav';
 import { WisdomOrb } from '@/components/WisdomOrb';
 import { DadStats } from '@/components/DadStats';
+import { OnboardingTooltips } from '@/components/OnboardingTooltips';
 
 const Index = () => {
   const [showMainSite, setShowMainSite] = useState(false);
@@ -40,6 +41,7 @@ const Index = () => {
       </div>
       
       <HeroSection />
+      <OnboardingTooltips />
       
       {/* Minimized Footer */}
       <footer className="bg-gray-900 text-white py-4">

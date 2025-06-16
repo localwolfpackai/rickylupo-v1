@@ -28,7 +28,7 @@ export const WisdomOrb = () => {
 
   return (
     <>
-      <div className="relative group">
+      <div className="relative group" data-onboarding="wisdom-orb">
         <button
           className="w-14 h-14 rounded-full backdrop-blur-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 flex items-center justify-center touch-target relative overflow-hidden"
           onClick={handleOrbClick}

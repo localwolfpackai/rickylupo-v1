@@ -1,3 +1,4 @@
+
 export const HeroSection = () => {
   return <section id="home" className="min-h-screen bg-black relative overflow-hidden flex items-center justify-center">
       <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black opacity-90" />
@@ -11,11 +12,6 @@ export const HeroSection = () => {
           animationDelay: '0.5s'
         }}>
             The World's Best Dad
-          </div>
-          <div className="text-sm md:text-base text-warmth-400 mt-2 animate-fade-in" style={{
-          animationDelay: '1s'
-        }}>
-            <em>According to his totally unbiased son</em>
           </div>
         </div>
 
@@ -43,12 +39,6 @@ export const HeroSection = () => {
           <p className="text-sm text-white/60 mt-4 italic">
             Check out the cool features in the bottom right corner
           </p>
-        </div>
-      </div>
-
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-        <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-white/50 rounded-full mt-2" />
         </div>
       </div>
     </section>;
