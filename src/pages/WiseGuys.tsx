@@ -1,7 +1,5 @@
-
-import { useState } from 'react';
-import { FloatingNav } from '@/components/FloatingNav';
-import { WisdomOrb } from '@/components/WisdomOrb';
+import { FloatingNav } from '@/components/layout/FloatingNav';
+import { WisdomOrb } from '@/components/dashboard/WisdomOrb';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Play, Pause, Volume2, VolumeX, Maximize } from 'lucide-react';

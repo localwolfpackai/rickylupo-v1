@@ -1,7 +1,6 @@
-
 import { useState } from 'react';
-import { FloatingNav } from '@/components/FloatingNav';
-import { WisdomOrb } from '@/components/WisdomOrb';
+import { FloatingNav } from '@/components/layout/FloatingNav';
+import { WisdomOrb } from '@/components/dashboard/WisdomOrb';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { X } from 'lucide-react';

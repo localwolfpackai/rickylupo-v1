@@ -1,66 +1,66 @@
 
 import { useState } from 'react';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
-import { Lightbulb, ArrowUpRight } from 'lucide-react';
 import { DashboardCard } from '@/components/shared/DashboardCard';
+import { Lightbulb } from 'lucide-react';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
 
-const dadWisdom = [
-  "\"Money doesn't grow on trees!\" - Dad's favorite financial advice since 1985",
-  "\"When I was your age...\" - The start of every legendary Dad story",
-  "\"Did you check the oil?\" - Dad's universal solution to car problems",
-  "\"We're not heating the neighborhood!\" - Said while adjusting the thermostat by 1 degree",
-  "\"That's highway robbery!\" - Dad's review of literally any price",
-  "\"Back in my day, gas was 50 cents!\" - Dad's inflation commentary",
-  "\"If you're gonna do it, do it right!\" - Dad's perfectionist motto",
-  "\"What's the WiFi password again?\" - Dad, every single time",
-  "\"I'm not sleeping, I'm just resting my eyes!\" - Dad on the couch at 3 PM",
-  "\"Ask your mother.\" - Dad's diplomatic solution to everything"
+const wisdomQuotes = [
+  "Back in my day, we didn't have Google. We had one encyclopedia and we were grateful!",
+  "Money doesn't grow on trees, but apparently app subscriptions do.",
+  "I'm not saying I'm old, but I remember when emojis were called 'feelings'.",
+  "The thermostat is not a suggestion. It's a carefully calculated family budget decision.",
+  "When I was your age, we had to walk uphill both ways to change the TV channel.",
+  "A penny saved is a penny earned, but a coupon saved is a victory over corporate America.",
 ];
 
 export const WisdomOrb = () => {
-  const [showModal, setShowModal] = useState(false);
+  const [showWisdom, setShowWisdom] = useState(false);
   const [currentWisdom, setCurrentWisdom] = useState('');
 
-  const handleOrbClick = () => {
-    const randomWisdom = dadWisdom[Math.floor(Math.random() * dadWisdom.length)];
+  const shareWisdom = () => {
+    const randomWisdom = wisdomQuotes[Math.floor(Math.random() * wisdomQuotes.length)];
     setCurrentWisdom(randomWisdom);
-    setShowModal(true);
+    setShowWisdom(true);
   };
 
   return (
     <>
-      <div className="relative animate-pulse" data-onboarding="wisdom-orb">
-        <DashboardCard
-          icon={Lightbulb}
-          title="Dad's wisdom awaits..."
-          variant="purple"
-          size="md"
-          floating={true}
-          onClick={handleOrbClick}
-        >
-          <ArrowUpRight className="h-3 w-3 absolute top-1 right-1 text-white/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        </DashboardCard>
-      </div>
+      <DashboardCard
+        icon={Lightbulb}
+        title="Dad's Wisdom"
+        description="Pearls of wisdom from the master"
+        variant="purple"
+        size="sm"
+        floating={true}
+        onClick={shareWisdom}
+        className="hover:scale-110 cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2"
+        tabIndex={0}
+        role="button"
+        aria-label="Get a piece of dad's wisdom"
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            shareWisdom();
+          }
+        }}
+      />
 
-      <Dialog open={showModal} onOpenChange={setShowModal}>
-        <DialogContent className="sm:max-w-lg backdrop-blur-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-white/10 shadow-2xl rounded-3xl overflow-hidden">
-          <div className="relative">
-            <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500"></div>
-            
-            <div className="text-center py-8 px-6">
-              <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-purple-500/30 to-pink-500/30 backdrop-blur-lg border border-white/20 flex items-center justify-center">
-                <Lightbulb className="h-8 w-8 text-white" />
-              </div>
-              
-              <h3 className="font-playfair text-2xl font-bold text-white mb-6">
-                Dad Wisdom™
-              </h3>
-              
-              <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20">
-                <p className="text-lg text-white/90 leading-relaxed font-medium">
-                  {currentWisdom}
-                </p>
-              </div>
+      <Dialog open={showWisdom} onOpenChange={setShowWisdom}>
+        <DialogContent 
+          className="sm:max-w-lg backdrop-blur-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-white/10 shadow-2xl rounded-3xl focus:outline-none"
+          aria-labelledby="wisdom-title"
+          aria-describedby="wisdom-content"
+        >
+          <div className="text-center py-6">
+            <Lightbulb className="h-16 w-16 text-purple-400 mx-auto mb-6" aria-hidden="true" />
+            <h3 id="wisdom-title" className="text-2xl font-bold text-white mb-6">
+              Dad's Wisdom
+            </h3>
+            <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20">
+              <p id="wisdom-content" className="text-lg text-white/90 italic leading-relaxed">
+                "{currentWisdom}"
+              </p>
+              <p className="text-sm text-white/60 mt-4">- Dad, probably</p>
             </div>
           </div>
         </DialogContent>

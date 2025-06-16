@@ -1,6 +1,5 @@
-
 import { useState } from 'react';
-import { DashboardCard } from '@/components/DashboardCard';
+import { DashboardCard } from '@/components/shared/DashboardCard';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Plus, Minus, Zap, Phone, DollarSign } from 'lucide-react';
