@@ -1,3 +1,5 @@
+
+import React, { useState } from 'react';
 import { FloatingNav } from '@/components/layout/FloatingNav';
 import { WisdomOrb } from '@/components/dashboard/WisdomOrb';
 import { Button } from '@/components/ui/button';
