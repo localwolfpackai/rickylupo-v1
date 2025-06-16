@@ -1,14 +1,13 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 
 const navItems = [
   { label: 'Home', href: '#home' },
-  { label: 'Stories', href: '#stories' },
-  { label: 'Gallery', href: '#gallery' },
+  { label: 'Dad Stories', href: '#stories' },
+  { label: 'Photo Vault', href: '#gallery' },
   { label: 'Wise Guys', href: '#wise-guys' },
-  { label: 'Cool Sh*t', href: '#cool-stuff' }
+  { label: 'Cool Stuff', href: '#cool-stuff' }
 ];
 
 export const FloatingNav = () => {
@@ -41,15 +40,16 @@ export const FloatingNav = () => {
       <nav className={`fixed top-6 left-1/2 transform -translate-x-1/2 z-40 transition-all duration-500 ${
         isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
       }`}>
-        <div className="bg-white/80 dark:bg-black/80 backdrop-blur-md rounded-full px-6 py-3 shadow-lg border border-white/20">
+        <div className="bg-white/90 dark:bg-black/90 backdrop-blur-md rounded-full px-8 py-4 shadow-xl border border-white/30 metallic-button">
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
-                className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-warmth-600 dark:hover:text-warmth-400 transition-colors duration-200"
+                className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-warmth-600 dark:hover:text-warmth-400 transition-colors duration-200 relative group"
               >
                 {item.label}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-warmth-500 transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
           </div>
@@ -71,7 +71,7 @@ export const FloatingNav = () => {
         <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm md:hidden">
           <div className="fixed inset-y-0 right-0 w-64 bg-white dark:bg-gray-900 shadow-xl transform transition-transform duration-300">
             <div className="flex items-center justify-between p-6 border-b">
-              <h2 className="font-playfair text-xl font-bold">Menu</h2>
+              <h2 className="font-playfair text-xl font-bold">Dad's Menu</h2>
               <Button
                 variant="ghost"
                 size="sm"
@@ -81,7 +81,7 @@ export const FloatingNav = () => {
               </Button>
             </div>
             <nav className="p-6">
-              <div className="space-y-4">
+              <div className="space-y-6">
                 {navItems.map((item) => (
                   <a
                     key={item.label}
@@ -92,6 +92,11 @@ export const FloatingNav = () => {
                     {item.label}
                   </a>
                 ))}
+                <div className="pt-4 border-t">
+                  <p className="text-xs text-gray-500 italic">
+                    "What's the WiFi password again?"
+                  </p>
+                </div>
               </div>
             </nav>
           </div>

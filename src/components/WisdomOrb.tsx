@@ -3,16 +3,16 @@ import { useState, useEffect } from 'react';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 
 const dadWisdom = [
-  "I can't believe how much that costs these days!",
-  "When I was your age, we walked uphill both ways.",
-  "Money doesn't grow on trees, you know.",
-  "Turn off those lights! We're not lighting up the neighborhood.",
-  "Did you check the oil in your car lately?",
-  "Always have a backup plan... and a backup for the backup.",
-  "If you're going to do something, do it right the first time.",
-  "That's not how we did it in my day.",
-  "You kids don't know how good you have it.",
-  "Remember: measure twice, cut once!"
+  "\"Money doesn't grow on trees!\" - Dad's favorite financial advice since 1985",
+  "\"When I was your age...\" - The start of every legendary Dad story",
+  "\"Did you check the oil?\" - Dad's universal solution to car problems",
+  "\"We're not heating the neighborhood!\" - Said while adjusting the thermostat by 1 degree",
+  "\"That's highway robbery!\" - Dad's review of literally any price",
+  "\"Back in my day, gas was 50 cents!\" - Dad's inflation commentary",
+  "\"If you're gonna do it, do it right!\" - Dad's perfectionist motto",
+  "\"What's the WiFi password again?\" - Dad, every single time",
+  "\"I'm not sleeping, I'm just resting my eyes!\" - Dad on the couch at 3 PM",
+  "\"Ask your mother.\" - Dad's diplomatic solution to everything"
 ];
 
 export const WisdomOrb = () => {
@@ -24,18 +24,18 @@ export const WisdomOrb = () => {
   useEffect(() => {
     const showOrb = () => {
       setPosition({
-        x: Math.random() * (window.innerWidth - 100),
-        y: Math.random() * (window.innerHeight - 100) + 100
+        x: Math.random() * (window.innerWidth - 80),
+        y: Math.random() * (window.innerHeight - 80) + 100
       });
       setIsVisible(true);
       
       setTimeout(() => {
         setIsVisible(false);
-      }, 8000); // Orb disappears after 8 seconds
+      }, 10000);
     };
 
-    const interval = setInterval(showOrb, 15000); // Show every 15 seconds
-    showOrb(); // Show immediately on mount
+    const interval = setInterval(showOrb, 20000);
+    showOrb();
 
     return () => clearInterval(interval);
   }, []);
@@ -55,21 +55,21 @@ export const WisdomOrb = () => {
         className="wisdom-orb"
         style={{ left: position.x, top: position.y }}
         onClick={handleOrbClick}
-      >
-        <div className="w-full h-full flex items-center justify-center text-white text-xl animate-pulse-gentle">
-          💡
-        </div>
-      </div>
+        title="Dad's wisdom awaits..."
+      />
 
       <Dialog open={showModal} onOpenChange={setShowModal}>
-        <DialogContent className="sm:max-w-md bg-gradient-to-br from-warmth-50 to-warmth-100 border-warmth-200">
-          <div className="text-center py-6">
-            <div className="text-6xl mb-4">👨‍👦</div>
-            <h3 className="font-playfair text-2xl font-bold text-warmth-800 mb-4">
-              Dad's Wisdom
+        <DialogContent className="sm:max-w-lg bg-gradient-to-br from-warmth-50 to-warmth-100 border-warmth-200">
+          <div className="text-center py-8">
+            <div className="text-6xl mb-6">👨‍👦‍👦</div>
+            <h3 className="font-playfair text-3xl font-bold text-warmth-800 mb-6">
+              Dad Wisdom™
             </h3>
-            <p className="text-lg text-warmth-700 italic animate-bloom">
-              "{currentWisdom}"
+            <p className="text-lg text-warmth-700 leading-relaxed animate-bloom font-medium">
+              {currentWisdom}
+            </p>
+            <p className="text-sm text-warmth-500 mt-4 italic">
+              - As interpreted by his loving (and slightly sarcastic) son
             </p>
           </div>
         </DialogContent>

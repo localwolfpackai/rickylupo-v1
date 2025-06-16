@@ -3,9 +3,9 @@ import { useState, useEffect } from 'react';
 
 const heroTexts = [
   'Once upon a time, there was a dad who took me fishing...',
-  'taught me everything I know...',
-  'made me his personal assistant for chores...',
-  'and makes us all so proud and happy every day.'
+  'taught me everything I know about being stubborn...',
+  'made me his personal assistant for every home project...',
+  'and somehow makes us all proud and happy every single day.'
 ];
 
 export const HeroSection = () => {
@@ -19,7 +19,7 @@ export const HeroSection = () => {
       } else {
         setIsTyping(false);
       }
-    }, 4000);
+    }, 4500);
 
     return () => clearTimeout(timer);
   }, [currentTextIndex]);
@@ -28,24 +28,27 @@ export const HeroSection = () => {
     <section id="home" className="min-h-screen bg-black relative overflow-hidden flex items-center justify-center">
       <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black opacity-90" />
       
-      <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
+      <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
         <div className="mb-8">
-          <h1 className="font-playfair text-4xl md:text-6xl lg:text-8xl font-bold text-white mb-6 animate-fade-in">
+          <h1 className="font-playfair text-5xl md:text-7xl lg:text-9xl font-bold text-white mb-6 animate-fade-in tracking-tight">
             Rick Lupo
           </h1>
-          <div className="text-xl md:text-2xl text-warmth-300 font-medium animate-fade-in" style={{ animationDelay: '0.5s' }}>
+          <div className="text-xl md:text-3xl text-warmth-300 font-medium animate-fade-in tracking-wide" style={{ animationDelay: '0.5s' }}>
             The World's Best Dad
+          </div>
+          <div className="text-sm md:text-base text-warmth-400 mt-2 animate-fade-in" style={{ animationDelay: '1s' }}>
+            <em>According to his totally unbiased son</em>
           </div>
         </div>
 
-        <div className="h-32 flex items-center justify-center">
+        <div className="h-40 flex items-center justify-center">
           {isTyping ? (
-            <p className="text-lg md:text-xl text-white/90 font-inter typing-text max-w-2xl">
+            <p className="text-lg md:text-xl text-white/90 font-inter typing-text max-w-3xl leading-relaxed">
               {heroTexts[currentTextIndex]}
             </p>
           ) : (
             <div className="animate-bloom">
-              <p className="text-lg md:text-xl text-white/90 font-inter max-w-2xl leading-relaxed">
+              <p className="text-lg md:text-xl text-white/90 font-inter max-w-3xl leading-relaxed">
                 {heroTexts.join(' ')}
               </p>
             </div>
@@ -54,6 +57,9 @@ export const HeroSection = () => {
 
         <div className="mt-12 animate-fade-in" style={{ animationDelay: '2s' }}>
           <div className="w-32 h-1 bg-gradient-to-r from-warmth-400 to-warmth-600 mx-auto rounded-full" />
+          <p className="text-sm text-white/60 mt-4 italic">
+            Scroll down for Dad's greatest hits and legendary moments
+          </p>
         </div>
       </div>
 
