@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { Lightbulb, ArrowUpRight } from 'lucide-react';
+import { DashboardCard } from '@/components/DashboardCard';
 
 const dadWisdom = [
   "\"Money doesn't grow on trees!\" - Dad's favorite financial advice since 1985",
@@ -28,26 +29,25 @@ export const WisdomOrb = () => {
 
   return (
     <>
-      <div className="relative group" data-onboarding="wisdom-orb">
-        <button
-          className="w-14 h-14 rounded-full backdrop-blur-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 flex items-center justify-center touch-target relative overflow-hidden"
-          onClick={handleOrbClick}
+      <div className="relative" data-onboarding="wisdom-orb">
+        <DashboardCard
+          icon={Lightbulb}
           title="Dad's wisdom awaits..."
+          variant="purple"
+          size="md"
+          floating={true}
+          onClick={handleOrbClick}
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-400/30 to-pink-400/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          <Lightbulb className="h-6 w-6 text-white/90 group-hover:text-white transition-colors duration-300 relative z-10" />
           <ArrowUpRight className="h-3 w-3 absolute top-1 right-1 text-white/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        </button>
+        </DashboardCard>
       </div>
 
       <Dialog open={showModal} onOpenChange={setShowModal}>
         <DialogContent className="sm:max-w-lg bg-white/95 backdrop-blur-xl border-0 shadow-2xl rounded-3xl overflow-hidden">
           <div className="relative">
-            {/* Modern gradient header */}
             <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500"></div>
             
             <div className="text-center py-8 px-6">
-              {/* Modern icon instead of emoji */}
               <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center">
                 <Lightbulb className="h-8 w-8 text-purple-600" />
               </div>

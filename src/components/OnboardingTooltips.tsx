@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { X, ArrowRight } from 'lucide-react';
+import { useTooltipPosition } from '@/hooks/useTooltipPosition';
 
 interface TooltipStep {
   id: string;
@@ -17,14 +18,14 @@ const tooltipSteps: TooltipStep[] = [
     id: 'wisdom-orb',
     target: 'wisdom-orb',
     title: 'Your Personal Wisdom Generator',
-    content: "Click this magical orb for instant Dad wisdom! Warning: May contain traces of 'back in my day' stories.",
+    content: "Click this magical orb for instant Dad wisdom! Warning: May contain traces of 'back in my day' stories and unsolicited life advice.",
     position: 'left'
   },
   {
     id: 'dad-stats',
     target: 'dad-stats',
     title: 'Dad\'s Hall of Fame',
-    content: "Your legendary statistics are here! Don't worry, we rounded down the dad jokes counter for everyone's sake.",
+    content: "Your legendary statistics are here! Don't worry, we rounded down the dad jokes counter to keep it believable... barely.",
     position: 'left'
   }
 ];
@@ -32,15 +33,21 @@ const tooltipSteps: TooltipStep[] = [
 export const OnboardingTooltips = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
-  const [tooltipPosition, setTooltipPosition] = useState({ top: 0, left: 0 });
+  
+  const currentStepData = tooltipSteps[currentStep];
+  const tooltipPosition = useTooltipPosition({
+    targetSelector: currentStepData?.target || '',
+    preferredPosition: currentStepData?.position || 'left',
+    tooltipWidth: 350,
+    tooltipHeight: 220,
+    offset: 20
+  });
 
   useEffect(() => {
     const hasSeenOnboarding = localStorage.getItem('rickLupoOnboardingSeen');
     const hasSeenIntro = sessionStorage.getItem('rickLupoIntroSeen');
     
-    // Only show onboarding if they've seen the intro but not the onboarding
     if (hasSeenIntro && !hasSeenOnboarding) {
-      // Delay to let the page load
       setTimeout(() => {
         showCurrentTooltip();
       }, 1000);
@@ -54,43 +61,12 @@ export const OnboardingTooltips = () => {
     const targetElement = document.querySelector(`[data-onboarding="${step.target}"]`);
     
     if (targetElement) {
-      const rect = targetElement.getBoundingClientRect();
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-      
-      let top = rect.top + scrollTop;
-      let left = rect.left + scrollLeft;
-      
-      // Adjust position based on tooltip position
-      switch (step.position) {
-        case 'left':
-          top = rect.top + scrollTop + rect.height / 2;
-          left = rect.left + scrollLeft - 320; // tooltip width + margin
-          break;
-        case 'right':
-          top = rect.top + scrollTop + rect.height / 2;
-          left = rect.left + scrollLeft + rect.width + 20;
-          break;
-        case 'top':
-          top = rect.top + scrollTop - 120; // tooltip height + margin
-          left = rect.left + scrollLeft + rect.width / 2;
-          break;
-        case 'bottom':
-          top = rect.top + scrollTop + rect.height + 20;
-          left = rect.left + scrollLeft + rect.width / 2;
-          break;
-      }
-      
-      setTooltipPosition({ top, left });
       setIsVisible(true);
-      
-      // Add highlight to target element
       targetElement.classList.add('onboarding-highlight');
     }
   };
 
   const nextStep = () => {
-    // Remove highlight from current element
     const currentStepData = tooltipSteps[currentStep];
     const currentElement = document.querySelector(`[data-onboarding="${currentStepData.target}"]`);
     if (currentElement) {
@@ -111,7 +87,6 @@ export const OnboardingTooltips = () => {
     setIsVisible(false);
     localStorage.setItem('rickLupoOnboardingSeen', 'true');
     
-    // Remove highlight from last element
     const lastStepData = tooltipSteps[currentStep];
     const lastElement = document.querySelector(`[data-onboarding="${lastStepData.target}"]`);
     if (lastElement) {
@@ -120,7 +95,6 @@ export const OnboardingTooltips = () => {
   };
 
   const skipOnboarding = () => {
-    // Remove all highlights
     tooltipSteps.forEach(step => {
       const element = document.querySelector(`[data-onboarding="${step.target}"]`);
       if (element) {
@@ -130,26 +104,31 @@ export const OnboardingTooltips = () => {
     finishOnboarding();
   };
 
-  if (!isVisible) return null;
+  if (!isVisible || !currentStepData) return null;
 
-  const currentStepData = tooltipSteps[currentStep];
+  const getTransformClass = () => {
+    switch (tooltipPosition.position) {
+      case 'top':
+      case 'bottom':
+        return 'translateX(-50%)';
+      case 'left':
+      case 'right':
+        return 'translateY(-50%)';
+      default:
+        return 'none';
+    }
+  };
 
   return (
     <>
-      {/* Backdrop */}
       <div className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40" />
       
-      {/* Tooltip */}
       <Card
         className="fixed z-50 w-80 bg-white shadow-2xl border-2 border-warmth-200 rounded-2xl overflow-hidden"
         style={{
           top: tooltipPosition.top,
           left: tooltipPosition.left,
-          transform: currentStepData.position === 'top' || currentStepData.position === 'bottom' 
-            ? 'translateX(-50%)' 
-            : currentStepData.position === 'left' || currentStepData.position === 'right'
-            ? 'translateY(-50%)'
-            : 'none'
+          transform: getTransformClass()
         }}
       >
         <div className="bg-gradient-to-r from-warmth-500 to-warmth-600 p-4">

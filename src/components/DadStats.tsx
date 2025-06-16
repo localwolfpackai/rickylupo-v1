@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { BarChart3, Coffee, Wrench, Heart, ArrowUpRight } from 'lucide-react';
+import { DashboardCard } from '@/components/DashboardCard';
 
 const stats = [
   {
@@ -35,16 +36,17 @@ export const DadStats = () => {
 
   return (
     <>
-      <div className="relative group" data-onboarding="dad-stats">
-        <button
-          onClick={() => setShowStats(true)}
-          className="w-14 h-14 rounded-full backdrop-blur-lg bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 flex items-center justify-center touch-target relative overflow-hidden"
+      <div className="relative" data-onboarding="dad-stats">
+        <DashboardCard
+          icon={BarChart3}
           title="Dad's greatest hits"
+          variant="blue"
+          size="md"
+          floating={true}
+          onClick={() => setShowStats(true)}
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-400/30 to-cyan-400/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          <BarChart3 className="h-6 w-6 text-white/90 group-hover:text-white transition-colors duration-300 relative z-10" />
           <ArrowUpRight className="h-3 w-3 absolute top-1 right-1 text-white/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        </button>
+        </DashboardCard>
       </div>
 
       <Dialog open={showStats} onOpenChange={setShowStats}>

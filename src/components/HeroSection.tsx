@@ -15,7 +15,6 @@ export const HeroSection = () => {
           </div>
         </div>
 
-        {/* Sleek Note Card */}
         <div className="animate-fade-in max-w-md mx-auto" style={{
         animationDelay: '1.5s'
       }}>
@@ -36,9 +35,6 @@ export const HeroSection = () => {
         animationDelay: '2s'
       }}>
           <div className="w-32 h-1 bg-gradient-to-r from-warmth-400 to-warmth-600 mx-auto rounded-full" />
-          <p className="text-sm text-white/60 mt-4 italic">
-            Check out the cool features in the bottom right corner
-          </p>
         </div>
       </div>
     </section>;
