@@ -56,15 +56,11 @@ export const WisdomOrb = () => {
                 Dad Wisdom™
               </h3>
               
-              <div className="bg-gray-50 rounded-2xl p-6 mb-6">
+              <div className="bg-gray-50 rounded-2xl p-6">
                 <p className="text-lg text-gray-700 leading-relaxed font-medium">
                   {currentWisdom}
                 </p>
               </div>
-              
-              <p className="text-sm text-gray-500 italic">
-                - As interpreted by his loving (and slightly sarcastic) son
-              </p>
             </div>
           </div>
         </DialogContent>
