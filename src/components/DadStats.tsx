@@ -1,12 +1,11 @@
 
 import { useState } from 'react';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Trophy, Coffee, Wrench, Heart } from 'lucide-react';
+import { BarChart3, Coffee, Wrench, Heart } from 'lucide-react';
 
 const stats = [
   {
-    icon: Trophy,
+    icon: BarChart3,
     label: "Dad Jokes Told",
     value: 47832,
     description: "And counting... each one carefully crafted to make you groan"
@@ -36,13 +35,13 @@ export const DadStats = () => {
 
   return (
     <>
-      <Button
+      <button
         onClick={() => setShowStats(true)}
-        variant="outline"
-        className="fixed top-24 right-6 z-40 bg-white/90 backdrop-blur-sm hover:bg-white/95 transition-all duration-300 text-sm font-medium shadow-lg border-warmth-200"
+        className="w-12 h-12 rounded-full backdrop-blur-md bg-white/10 border border-white/20 shadow-lg hover:bg-white/20 transition-all duration-300 hover:scale-110 flex items-center justify-center touch-target group"
+        title="Dad's greatest hits"
       >
-        Dad's Stats
-      </Button>
+        <BarChart3 className="h-5 w-5 text-white/90 group-hover:text-white transition-colors duration-300" />
+      </button>
 
       <Dialog open={showStats} onOpenChange={setShowStats}>
         <DialogContent className="sm:max-w-2xl bg-gradient-to-br from-warmth-50 to-warmth-100 border-warmth-200">

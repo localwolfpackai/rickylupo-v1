@@ -19,7 +19,7 @@ export const HeroSection = () => {
 
         <div className="animate-fade-in" style={{ animationDelay: '1.5s' }}>
           <p className="text-lg md:text-xl text-white/90 font-inter max-w-3xl mx-auto leading-relaxed">
-            Once upon a time, there was a dad who took me fishing, taught me everything I know about being stubborn, 
+            There was a dad who took me fishing, taught me everything I know about being stubborn, 
             made me his personal assistant for every home project, and somehow makes us all proud and happy every single day.
           </p>
         </div>

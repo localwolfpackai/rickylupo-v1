@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { CinematicEntrance } from '@/components/CinematicEntrance';
 import { HeroSection } from '@/components/HeroSection';
 import { FloatingNav } from '@/components/FloatingNav';
@@ -8,23 +8,43 @@ import { DadStats } from '@/components/DadStats';
 
 const Index = () => {
   const [showMainSite, setShowMainSite] = useState(false);
+  const [hasSeenIntro, setHasSeenIntro] = useState(false);
 
-  if (!showMainSite) {
-    return <CinematicEntrance onComplete={() => setShowMainSite(true)} />;
+  useEffect(() => {
+    // Check if user has seen the intro this session
+    const introSeen = sessionStorage.getItem('rickLupoIntroSeen');
+    if (introSeen) {
+      setHasSeenIntro(true);
+      setShowMainSite(true);
+    }
+  }, []);
+
+  const handleIntroComplete = () => {
+    sessionStorage.setItem('rickLupoIntroSeen', 'true');
+    setHasSeenIntro(true);
+    setShowMainSite(true);
+  };
+
+  if (!hasSeenIntro && !showMainSite) {
+    return <CinematicEntrance onComplete={handleIntroComplete} />;
   }
 
   return (
     <div className="min-h-screen">
       <FloatingNav />
-      <WisdomOrb />
-      <DadStats />
+      
+      {/* Bottom Right Floating Elements */}
+      <div className="fixed bottom-6 right-6 z-50 flex gap-3">
+        <WisdomOrb />
+        <DadStats />
+      </div>
       
       <HeroSection />
       
-      {/* Simplified Footer */}
-      <footer className="bg-gray-900 text-white py-8">
+      {/* Minimized Footer */}
+      <footer className="bg-gray-900 text-white py-4">
         <div className="container mx-auto px-6 text-center">
-          <h3 className="font-playfair text-xl font-bold mb-2">
+          <h3 className="font-playfair text-lg font-bold mb-1">
             Rick Lupo
           </h3>
           <p className="text-xs text-gray-500">

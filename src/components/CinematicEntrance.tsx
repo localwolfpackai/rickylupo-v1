@@ -12,16 +12,34 @@ const entranceText = [
 
 export const CinematicEntrance = ({ onComplete }: { onComplete: () => void }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [displayedText, setDisplayedText] = useState('');
+  const [isTyping, setIsTyping] = useState(true);
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    if (currentIndex < entranceText.length) {
-      const timer = setTimeout(() => {
-        setCurrentIndex(currentIndex + 1);
-      }, 3500);
+    if (currentIndex < entranceText.length && isTyping) {
+      const currentText = entranceText[currentIndex];
+      let charIndex = 0;
+      
+      const typeInterval = setInterval(() => {
+        if (charIndex < currentText.length) {
+          setDisplayedText(currentText.slice(0, charIndex + 1));
+          charIndex++;
+        } else {
+          clearInterval(typeInterval);
+          setIsTyping(false);
+          
+          // Wait before moving to next text
+          setTimeout(() => {
+            setCurrentIndex(currentIndex + 1);
+            setDisplayedText('');
+            setIsTyping(true);
+          }, 1500);
+        }
+      }, 50); // Typing speed
 
-      return () => clearTimeout(timer);
-    } else {
+      return () => clearInterval(typeInterval);
+    } else if (currentIndex >= entranceText.length) {
       const fadeTimer = setTimeout(() => {
         setIsVisible(false);
         setTimeout(onComplete, 1000);
@@ -29,7 +47,7 @@ export const CinematicEntrance = ({ onComplete }: { onComplete: () => void }) =>
 
       return () => clearTimeout(fadeTimer);
     }
-  }, [currentIndex, onComplete]);
+  }, [currentIndex, isTyping, onComplete]);
 
   if (!isVisible) return null;
 
@@ -38,11 +56,9 @@ export const CinematicEntrance = ({ onComplete }: { onComplete: () => void }) =>
       <div className="max-w-4xl mx-auto px-6 text-center">
         <div className="h-32 flex items-center justify-center">
           {currentIndex < entranceText.length ? (
-            <p 
-              key={currentIndex}
-              className="text-xl md:text-2xl text-white font-inter typing-text animate-fade-in"
-            >
-              {entranceText[currentIndex]}
+            <p className="text-xl md:text-2xl text-white font-inter min-h-[3rem] flex items-center">
+              {displayedText}
+              <span className="inline-block w-0.5 h-6 bg-white ml-1 animate-pulse" />
             </p>
           ) : (
             <div className="animate-fade-in">

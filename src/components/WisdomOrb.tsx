@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { Lightbulb } from 'lucide-react';
 
 const dadWisdom = [
   "\"Money doesn't grow on trees!\" - Dad's favorite financial advice since 1985",
@@ -27,29 +28,13 @@ export const WisdomOrb = () => {
 
   return (
     <>
-      <div className="fixed bottom-6 right-6 z-50">
-        <div
-          className="relative w-16 h-16 rounded-full cursor-pointer transition-all duration-300 hover:scale-110 group touch-target"
-          style={{
-            background: 'linear-gradient(135deg, #8b5cf6 0%, #f59e0b  50%, #ef4444 100%)',
-            boxShadow: '0 8px 32px rgba(139, 92, 246, 0.3), inset 0 2px 8px rgba(255, 255, 255, 0.2)',
-          }}
-          onClick={handleOrbClick}
-          title="Dad's wisdom awaits..."
-        >
-          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/20 to-transparent" />
-          
-          {/* Click me indicator */}
-          <div className="absolute -top-2 -right-2 bg-white/90 text-xs px-2 py-1 rounded-full text-purple-700 font-medium animate-pulse opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
-            Click me!
-          </div>
-          
-          {/* Dad emoji in center */}
-          <div className="absolute inset-0 flex items-center justify-center text-2xl">
-            👨‍👦‍👦
-          </div>
-        </div>
-      </div>
+      <button
+        className="w-12 h-12 rounded-full backdrop-blur-md bg-white/10 border border-white/20 shadow-lg hover:bg-white/20 transition-all duration-300 hover:scale-110 flex items-center justify-center touch-target group"
+        onClick={handleOrbClick}
+        title="Dad's wisdom awaits..."
+      >
+        <Lightbulb className="h-5 w-5 text-white/90 group-hover:text-white transition-colors duration-300" />
+      </button>
 
       <Dialog open={showModal} onOpenChange={setShowModal}>
         <DialogContent className="sm:max-w-lg bg-gradient-to-br from-warmth-50 to-warmth-100 border-warmth-200">
