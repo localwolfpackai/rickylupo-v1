@@ -79,13 +79,6 @@
   .dark .hero-gradient {
     background: linear-gradient(135deg, rgba(0,0,0,0.1) 0%, rgba(26,26,26,0.8) 100%);
   }
-  
-  .typing-text {
-    overflow: hidden;
-    border-right: 3px solid #f59932;
-    white-space: nowrap;
-    animation: typing 4s steps(50, end), blink 1s infinite;
-  }
 
   .metallic-button {
     background: linear-gradient(135deg, #f3f4f6 0%, #d1d5db 50%, #9ca3af 100%);
@@ -137,19 +130,28 @@
 }
 
 @keyframes bloom {
-  0% { opacity: 0; transform: scale(0.8); }
-  50% { opacity: 1; transform: scale(1.05); }
+  0% { opacity: 0; transform: scale(0.95); }
   100% { opacity: 1; transform: scale(1); }
 }
 
-@keyframes typing {
-  0% { width: 0; }
-  100% { width: 100%; }
+@keyframes fade-in {
+  0% { 
+    opacity: 0; 
+    transform: translateY(20px); 
+  }
+  100% { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
 }
 
-@keyframes blink {
-  0%, 100% { opacity: 0; }
-  50% { opacity: 1; }
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0px); 
+  }
+  50% { 
+    transform: translateY(-10px); 
+  }
 }
 
 @keyframes loading-shimmer {
