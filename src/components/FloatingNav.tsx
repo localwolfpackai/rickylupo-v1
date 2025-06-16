@@ -43,14 +43,22 @@ export const FloatingNav = () => {
   }, [location]);
 
   const NavLink = ({ item }: { item: typeof navItems[0] }) => {
+    const isActive = location.pathname === item.href;
+    
     if (item.internal) {
       return (
         <Link
           to={item.href}
-          className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-warmth-600 dark:hover:text-warmth-400 transition-colors duration-200 relative group"
+          className={`text-sm font-medium transition-colors duration-200 relative group ${
+            isActive 
+              ? 'text-warmth-600 dark:text-warmth-400' 
+              : 'text-gray-700 dark:text-gray-300 hover:text-warmth-600 dark:hover:text-warmth-400'
+          }`}
         >
           {item.label}
-          <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-warmth-500 transition-all duration-300 group-hover:w-full" />
+          <span className={`absolute -bottom-1 left-0 h-0.5 bg-warmth-500 transition-all duration-300 ${
+            isActive ? 'w-full' : 'w-0 group-hover:w-full'
+          }`} />
         </Link>
       );
     }
@@ -70,11 +78,17 @@ export const FloatingNav = () => {
   };
 
   const MobileNavLink = ({ item }: { item: typeof navItems[0] }) => {
+    const isActive = location.pathname === item.href;
+    
     if (item.internal) {
       return (
         <Link
           to={item.href}
-          className="block text-lg font-medium text-gray-700 dark:text-gray-300 hover:text-warmth-600 dark:hover:text-warmth-400 transition-colors duration-200 py-2"
+          className={`block text-lg font-medium transition-colors duration-200 py-2 ${
+            isActive 
+              ? 'text-warmth-600 dark:text-warmth-400' 
+              : 'text-gray-700 dark:text-gray-300 hover:text-warmth-600 dark:hover:text-warmth-400'
+          }`}
         >
           {item.label}
         </Link>
