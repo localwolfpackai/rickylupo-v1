@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { Lightbulb, ArrowUpRight } from 'lucide-react';
-import { DashboardCard } from '@/components/DashboardCard';
+import { DashboardCard } from '@/components/shared/DashboardCard';
 
 const dadWisdom = [
   "\"Money doesn't grow on trees!\" - Dad's favorite financial advice since 1985",
@@ -29,7 +29,7 @@ export const WisdomOrb = () => {
 
   return (
     <>
-      <div className="relative" data-onboarding="wisdom-orb">
+      <div className="relative animate-pulse" data-onboarding="wisdom-orb">
         <DashboardCard
           icon={Lightbulb}
           title="Dad's wisdom awaits..."

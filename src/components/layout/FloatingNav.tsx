@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menu, X, ExternalLink } from 'lucide-react';
+import { useScrollVisibility } from '@/hooks/useScrollVisibility';
 
 const navItems = [
   { label: 'Home', href: '/', internal: true },
@@ -12,30 +13,9 @@ const navItems = [
 ];
 
 export const FloatingNav = () => {
-  const [isVisible, setIsVisible] = useState(true);
+  const isVisible = useScrollVisibility(100);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const location = useLocation();
-
-  useEffect(() => {
-    const controlNavbar = () => {
-      if (typeof window !== 'undefined') {
-        if (window.scrollY > lastScrollY && window.scrollY > 100) {
-          setIsVisible(false);
-        } else {
-          setIsVisible(true);
-        }
-        setLastScrollY(window.scrollY);
-      }
-    };
-
-    if (typeof window !== 'undefined') {
-      window.addEventListener('scroll', controlNavbar);
-      return () => {
-        window.removeEventListener('scroll', controlNavbar);
-      };
-    }
-  }, [lastScrollY]);
 
   // Close mobile menu when route changes
   useEffect(() => {

@@ -122,10 +122,20 @@ export default {
 				},
 				'pulse-gentle': {
 					'0%, 100%': {
-						opacity: '1'
+						opacity: '1',
+						transform: 'scale(1)'
 					},
 					'50%': {
-						opacity: '0.7'
+						opacity: '0.8',
+						transform: 'scale(1.05)'
+					}
+				},
+				'glow': {
+					'0%, 100%': {
+						boxShadow: '0 0 20px rgba(245, 158, 11, 0.3)'
+					},
+					'50%': {
+						boxShadow: '0 0 40px rgba(245, 158, 11, 0.6)'
 					}
 				},
 				'typing': {
@@ -149,6 +159,7 @@ export default {
 				'bloom': 'bloom 0.4s ease-out',
 				'float': 'float 3s ease-in-out infinite',
 				'pulse-gentle': 'pulse-gentle 2s ease-in-out infinite',
+				'glow': 'glow 2s ease-in-out infinite',
 				'typing': 'typing 3.5s steps(40, end)',
 				'blink': 'blink 1s infinite'
 			}

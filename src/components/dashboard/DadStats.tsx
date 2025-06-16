@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { BarChart3, Coffee, Wrench, Heart, ArrowUpRight } from 'lucide-react';
-import { DashboardCard } from '@/components/DashboardCard';
+import { DashboardCard } from '@/components/shared/DashboardCard';
 
 const stats = [
   {
