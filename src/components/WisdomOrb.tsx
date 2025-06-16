@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 
 const dadWisdom = [
@@ -16,47 +16,40 @@ const dadWisdom = [
 ];
 
 export const WisdomOrb = () => {
-  const [position, setPosition] = useState({ x: 80, y: 80 });
-  const [isVisible, setIsVisible] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [currentWisdom, setCurrentWisdom] = useState('');
-
-  useEffect(() => {
-    const showOrb = () => {
-      setPosition({
-        x: Math.random() * (window.innerWidth - 80),
-        y: Math.random() * (window.innerHeight - 80) + 100
-      });
-      setIsVisible(true);
-      
-      setTimeout(() => {
-        setIsVisible(false);
-      }, 10000);
-    };
-
-    const interval = setInterval(showOrb, 20000);
-    showOrb();
-
-    return () => clearInterval(interval);
-  }, []);
 
   const handleOrbClick = () => {
     const randomWisdom = dadWisdom[Math.floor(Math.random() * dadWisdom.length)];
     setCurrentWisdom(randomWisdom);
     setShowModal(true);
-    setIsVisible(false);
   };
-
-  if (!isVisible) return null;
 
   return (
     <>
-      <div
-        className="wisdom-orb"
-        style={{ left: position.x, top: position.y }}
-        onClick={handleOrbClick}
-        title="Dad's wisdom awaits..."
-      />
+      <div className="fixed bottom-6 right-6 z-50">
+        <div
+          className="relative w-16 h-16 rounded-full cursor-pointer transition-all duration-300 hover:scale-110 group touch-target"
+          style={{
+            background: 'linear-gradient(135deg, #8b5cf6 0%, #f59e0b  50%, #ef4444 100%)',
+            boxShadow: '0 8px 32px rgba(139, 92, 246, 0.3), inset 0 2px 8px rgba(255, 255, 255, 0.2)',
+          }}
+          onClick={handleOrbClick}
+          title="Dad's wisdom awaits..."
+        >
+          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/20 to-transparent" />
+          
+          {/* Click me indicator */}
+          <div className="absolute -top-2 -right-2 bg-white/90 text-xs px-2 py-1 rounded-full text-purple-700 font-medium animate-pulse opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+            Click me!
+          </div>
+          
+          {/* Dad emoji in center */}
+          <div className="absolute inset-0 flex items-center justify-center text-2xl">
+            👨‍👦‍👦
+          </div>
+        </div>
+      </div>
 
       <Dialog open={showModal} onOpenChange={setShowModal}>
         <DialogContent className="sm:max-w-lg bg-gradient-to-br from-warmth-50 to-warmth-100 border-warmth-200">
