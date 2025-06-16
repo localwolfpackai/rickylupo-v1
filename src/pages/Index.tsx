@@ -1,10 +1,8 @@
-
 import { useState } from 'react';
 import { CinematicEntrance } from '@/components/CinematicEntrance';
 import { HeroSection } from '@/components/HeroSection';
 import { FloatingNav } from '@/components/FloatingNav';
 import { InteractiveCounters } from '@/components/InteractiveCounters';
-import { PhotoGallery } from '@/components/PhotoGallery';
 import { WisdomOrb } from '@/components/WisdomOrb';
 
 const Index = () => {
@@ -21,7 +19,6 @@ const Index = () => {
       
       <HeroSection />
       <InteractiveCounters />
-      <PhotoGallery />
       
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">

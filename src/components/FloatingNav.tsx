@@ -1,19 +1,21 @@
+
 import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ExternalLink } from 'lucide-react';
 
 const navItems = [
-  { label: 'Home', href: '#home' },
-  { label: 'Dad Stories', href: '#stories' },
-  { label: 'Photo Vault', href: '#gallery' },
-  { label: 'Wise Guys', href: '#wise-guys' },
-  { label: 'Cool Stuff', href: '#cool-stuff' }
+  { label: 'Home', href: '/', internal: true },
+  { label: 'Photo Vault', href: '/photo-vault', internal: true },
+  { label: 'Wise Guys', href: '/wise-guys', internal: true },
+  { label: 'Cool Stuff', href: 'https://bruno-simon.com/', internal: false }
 ];
 
 export const FloatingNav = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const location = useLocation();
 
   useEffect(() => {
     const controlNavbar = () => {
@@ -35,6 +37,63 @@ export const FloatingNav = () => {
     }
   }, [lastScrollY]);
 
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location]);
+
+  const NavLink = ({ item }: { item: typeof navItems[0] }) => {
+    if (item.internal) {
+      return (
+        <Link
+          to={item.href}
+          className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-warmth-600 dark:hover:text-warmth-400 transition-colors duration-200 relative group"
+        >
+          {item.label}
+          <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-warmth-500 transition-all duration-300 group-hover:w-full" />
+        </Link>
+      );
+    }
+
+    return (
+      <a
+        href={item.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-warmth-600 dark:hover:text-warmth-400 transition-colors duration-200 relative group flex items-center gap-1"
+      >
+        {item.label}
+        <ExternalLink className="h-3 w-3" />
+        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-warmth-500 transition-all duration-300 group-hover:w-full" />
+      </a>
+    );
+  };
+
+  const MobileNavLink = ({ item }: { item: typeof navItems[0] }) => {
+    if (item.internal) {
+      return (
+        <Link
+          to={item.href}
+          className="block text-lg font-medium text-gray-700 dark:text-gray-300 hover:text-warmth-600 dark:hover:text-warmth-400 transition-colors duration-200 py-2"
+        >
+          {item.label}
+        </Link>
+      );
+    }
+
+    return (
+      <a
+        href={item.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block text-lg font-medium text-gray-700 dark:text-gray-300 hover:text-warmth-600 dark:hover:text-warmth-400 transition-colors duration-200 py-2 flex items-center gap-2"
+      >
+        {item.label}
+        <ExternalLink className="h-4 w-4" />
+      </a>
+    );
+  };
+
   return (
     <>
       <nav className={`fixed top-6 left-1/2 transform -translate-x-1/2 z-40 transition-all duration-500 ${
@@ -43,14 +102,7 @@ export const FloatingNav = () => {
         <div className="bg-white/90 dark:bg-black/90 backdrop-blur-md rounded-full px-8 py-4 shadow-xl border border-white/30 metallic-button">
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-warmth-600 dark:hover:text-warmth-400 transition-colors duration-200 relative group"
-              >
-                {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-warmth-500 transition-all duration-300 group-hover:w-full" />
-              </a>
+              <NavLink key={item.label} item={item} />
             ))}
           </div>
           
@@ -59,6 +111,7 @@ export const FloatingNav = () => {
               variant="ghost"
               size="sm"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="min-h-[44px] min-w-[44px]"
             >
               {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
@@ -76,23 +129,17 @@ export const FloatingNav = () => {
                 variant="ghost"
                 size="sm"
                 onClick={() => setIsMobileMenuOpen(false)}
+                className="min-h-[44px] min-w-[44px]"
               >
                 <X className="h-5 w-5" />
               </Button>
             </div>
             <nav className="p-6">
-              <div className="space-y-6">
+              <div className="space-y-2">
                 {navItems.map((item) => (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="block text-lg font-medium text-gray-700 dark:text-gray-300 hover:text-warmth-600 dark:hover:text-warmth-400 transition-colors duration-200"
-                  >
-                    {item.label}
-                  </a>
+                  <MobileNavLink key={item.label} item={item} />
                 ))}
-                <div className="pt-4 border-t">
+                <div className="pt-4 border-t mt-6">
                   <p className="text-xs text-gray-500 italic">
                     "What's the WiFi password again?"
                   </p>

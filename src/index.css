@@ -67,13 +67,15 @@
 
 @layer components {
   .wisdom-orb {
-    @apply fixed w-10 h-10 rounded-full cursor-pointer transition-all duration-500 z-50;
+    @apply fixed w-12 h-12 rounded-full cursor-pointer transition-all duration-500 z-50;
     background: linear-gradient(135deg, #e5e7eb 0%, #9ca3af 50%, #6b7280 100%);
     box-shadow: 
       0 4px 15px rgba(0, 0, 0, 0.2),
       inset 0 1px 3px rgba(255, 255, 255, 0.6),
       inset 0 -1px 3px rgba(0, 0, 0, 0.2);
     animation: float 4s ease-in-out infinite, gentle-pulse 3s ease-in-out infinite;
+    min-height: 44px;
+    min-width: 44px;
   }
   
   .wisdom-orb:hover {
@@ -127,6 +129,29 @@
   .coin-drop {
     animation: coin-drop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
+
+  /* Enhanced mobile touch targets */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Image loading animation */
+  .image-loading {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading-shimmer 1.5s infinite;
+  }
+
+  /* Focus indicators for accessibility */
+  .focus-ring:focus {
+    @apply outline-none ring-2 ring-warmth-500 ring-offset-2;
+  }
 }
 
 @keyframes gentle-pulse {
@@ -173,4 +198,55 @@
 @keyframes blink {
   0%, 100% { opacity: 0; }
   50% { opacity: 1; }
+}
+
+@keyframes loading-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Mobile-specific improvements */
+@media (max-width: 768px) {
+  .wisdom-orb {
+    @apply w-10 h-10;
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .metallic-button {
+    padding: 12px 24px;
+  }
+  
+  /* Improve typography on mobile */
+  .font-playfair {
+    line-height: 1.2;
+    word-spacing: -0.05em;
+  }
+  
+  /* Better button spacing on mobile */
+  .mobile-button-spacing {
+    gap: 16px;
+  }
+}
+
+/* Tablet improvements */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* High DPI display improvements */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .metallic-button {
+    box-shadow: 
+      0 2px 8px rgba(0, 0, 0, 0.1),
+      inset 0 0.5px 1px rgba(255, 255, 255, 0.8),
+      inset 0 -0.5px 1px rgba(0, 0, 0, 0.2);
+  }
 }
