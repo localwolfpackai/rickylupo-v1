@@ -1,7 +1,7 @@
 
 import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Text, Float, OrbitControls, Stars, Sphere, Box } from '@react-three/drei';
+import { Text, Float, OrbitControls, Stars } from '@react-three/drei';
 import * as THREE from 'three';
 
 const FloatingGeometry = ({ position, color, shape = 'box' }: { position: [number, number, number], color: string, shape?: 'box' | 'sphere' }) => {
@@ -17,15 +17,18 @@ const FloatingGeometry = ({ position, color, shape = 'box' }: { position: [numbe
 
   return (
     <Float speed={2} rotationIntensity={1} floatIntensity={0.5}>
-      {shape === 'sphere' ? (
-        <Sphere ref={meshRef} position={position} args={[0.5, 32, 32]}>
-          <meshStandardMaterial color={color} metalness={0.8} roughness={0.2} />
-        </Sphere>
-      ) : (
-        <Box ref={meshRef} position={position} args={[1, 1, 1]}>
-          <meshStandardMaterial color={color} metalness={0.6} roughness={0.3} />
-        </Box>
-      )}
+      <mesh ref={meshRef} position={position}>
+        {shape === 'sphere' ? (
+          <sphereGeometry args={[0.5, 32, 32]} />
+        ) : (
+          <boxGeometry args={[1, 1, 1]} />
+        )}
+        <meshStandardMaterial 
+          color={color} 
+          metalness={shape === 'sphere' ? 0.8 : 0.6} 
+          roughness={shape === 'sphere' ? 0.2 : 0.3} 
+        />
+      </mesh>
     </Float>
   );
 };
@@ -54,7 +57,7 @@ const ParticleField = () => {
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"
-          count={200}
+          count={particlesPosition.length / 3}
           array={particlesPosition}
           itemSize={3}
         />
