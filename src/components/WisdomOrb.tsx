@@ -43,21 +43,21 @@ export const WisdomOrb = () => {
       </div>
 
       <Dialog open={showModal} onOpenChange={setShowModal}>
-        <DialogContent className="sm:max-w-lg bg-white/95 backdrop-blur-xl border-0 shadow-2xl rounded-3xl overflow-hidden">
+        <DialogContent className="sm:max-w-lg backdrop-blur-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-white/10 shadow-2xl rounded-3xl overflow-hidden">
           <div className="relative">
             <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500"></div>
             
             <div className="text-center py-8 px-6">
-              <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center">
-                <Lightbulb className="h-8 w-8 text-purple-600" />
+              <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-purple-500/30 to-pink-500/30 backdrop-blur-lg border border-white/20 flex items-center justify-center">
+                <Lightbulb className="h-8 w-8 text-white" />
               </div>
               
-              <h3 className="font-playfair text-2xl font-bold text-gray-800 mb-6">
+              <h3 className="font-playfair text-2xl font-bold text-white mb-6">
                 Dad Wisdom™
               </h3>
               
-              <div className="bg-gray-50 rounded-2xl p-6">
-                <p className="text-lg text-gray-700 leading-relaxed font-medium">
+              <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20">
+                <p className="text-lg text-white/90 leading-relaxed font-medium">
                   {currentWisdom}
                 </p>
               </div>
