@@ -17,17 +17,25 @@ export const HeroSection = () => {
           </div>
         </div>
 
-        <div className="animate-fade-in" style={{ animationDelay: '1.5s' }}>
-          <p className="text-lg md:text-xl text-white/90 font-inter max-w-3xl mx-auto leading-relaxed">
-            There was a dad who took me fishing, taught me everything I know about being stubborn, 
-            made me his personal assistant for every home project, and somehow makes us all proud and happy every single day.
-          </p>
+        {/* Sleek Note Card */}
+        <div className="animate-fade-in max-w-md mx-auto" style={{ animationDelay: '1.5s' }}>
+          <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-2xl">
+            <div className="text-warmth-300 text-sm font-medium mb-2 tracking-wide">
+              A Little Note For You, Dad:
+            </div>
+            <p className="text-white/90 text-sm leading-relaxed font-inter">
+              Thanks for being the most amazing, funny, and supportive dad. We love your quirks, your wisdom, and even your questionable dance moves. This dashboard is a small token of our huge appreciation! ❤️
+            </p>
+            <div className="mt-4 text-right">
+              <span className="text-warmth-400 text-xs italic">Got it, love you too!</span>
+            </div>
+          </div>
         </div>
 
         <div className="mt-12 animate-fade-in" style={{ animationDelay: '2s' }}>
           <div className="w-32 h-1 bg-gradient-to-r from-warmth-400 to-warmth-600 mx-auto rounded-full" />
           <p className="text-sm text-white/60 mt-4 italic">
-            Scroll down for Dad's greatest hits and legendary moments
+            Check out the cool features in the bottom right corner
           </p>
         </div>
       </div>

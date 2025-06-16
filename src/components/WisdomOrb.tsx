@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
-import { Lightbulb } from 'lucide-react';
+import { Lightbulb, ArrowUpRight } from 'lucide-react';
 
 const dadWisdom = [
   "\"Money doesn't grow on trees!\" - Dad's favorite financial advice since 1985",
@@ -28,13 +28,17 @@ export const WisdomOrb = () => {
 
   return (
     <>
-      <button
-        className="w-12 h-12 rounded-full backdrop-blur-md bg-white/10 border border-white/20 shadow-lg hover:bg-white/20 transition-all duration-300 hover:scale-110 flex items-center justify-center touch-target group"
-        onClick={handleOrbClick}
-        title="Dad's wisdom awaits..."
-      >
-        <Lightbulb className="h-5 w-5 text-white/90 group-hover:text-white transition-colors duration-300" />
-      </button>
+      <div className="relative group">
+        <button
+          className="w-14 h-14 rounded-full backdrop-blur-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 flex items-center justify-center touch-target relative overflow-hidden"
+          onClick={handleOrbClick}
+          title="Dad's wisdom awaits..."
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-400/30 to-pink-400/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <Lightbulb className="h-6 w-6 text-white/90 group-hover:text-white transition-colors duration-300 relative z-10" />
+          <ArrowUpRight className="h-3 w-3 absolute top-1 right-1 text-white/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        </button>
+      </div>
 
       <Dialog open={showModal} onOpenChange={setShowModal}>
         <DialogContent className="sm:max-w-lg bg-gradient-to-br from-warmth-50 to-warmth-100 border-warmth-200">
