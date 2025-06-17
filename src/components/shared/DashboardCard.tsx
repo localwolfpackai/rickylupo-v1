@@ -37,11 +37,19 @@ export const DashboardCard = forwardRef<HTMLDivElement, DashboardCardProps>(({
   ...props
 }, ref) => {
   const variants = {
-    blue: 'from-blue-500/20 to-cyan-500/20 border-blue-500/30',
-    green: 'from-green-500/20 to-emerald-500/20 border-green-500/30',
-    purple: 'from-purple-500/20 to-pink-500/20 border-purple-500/30',
-    orange: 'from-orange-500/20 to-red-500/20 border-orange-500/30',
-    teal: 'from-teal-500/20 to-cyan-500/20 border-teal-500/30',
+    blue: 'from-blue-500/20 to-cyan-500/20 border-blue-500/30 shadow-blue-500/20',
+    green: 'from-green-500/20 to-emerald-500/20 border-green-500/30 shadow-green-500/20',
+    purple: 'from-purple-500/20 to-pink-500/20 border-purple-500/30 shadow-purple-500/20',
+    orange: 'from-orange-500/20 to-red-500/20 border-orange-500/30 shadow-orange-500/20',
+    teal: 'from-teal-500/20 to-cyan-500/20 border-teal-500/30 shadow-teal-500/20',
+  };
+
+  const glowVariants = {
+    blue: 'hover:shadow-blue-500/40',
+    green: 'hover:shadow-green-500/40',
+    purple: 'hover:shadow-purple-glow',
+    orange: 'hover:shadow-orange-500/40',
+    teal: 'hover:shadow-teal-glow',
   };
 
   const sizes = {
@@ -51,18 +59,20 @@ export const DashboardCard = forwardRef<HTMLDivElement, DashboardCardProps>(({
   };
 
   const floatingClasses = floating
-    ? 'shadow-2xl hover:shadow-3xl transition-all duration-300'
+    ? 'shadow-2xl hover:shadow-3xl'
     : '';
 
   return (
     <Card
       ref={ref}
       className={cn(
-        'backdrop-blur-lg bg-gradient-to-br border shadow-lg transition-all duration-300',
+        'card-premium bg-gradient-to-br border gpu-accelerated',
         variants[variant],
         sizes[size],
         floatingClasses,
-        onClick && 'cursor-pointer hover:scale-105',
+        glowVariants[variant],
+        onClick && 'cursor-pointer interactive-element micro-press',
+        'focus-visible-enhanced',
         className
       )}
       onClick={onClick}
@@ -72,18 +82,32 @@ export const DashboardCard = forwardRef<HTMLDivElement, DashboardCardProps>(({
       onKeyDown={onKeyDown}
       {...props}
     >
-      <div className="flex flex-col items-center justify-center h-full text-center">
-        {Icon && <Icon className="h-8 w-8 text-white mb-2" aria-hidden="true" />}
+      <div className="flex flex-col items-center justify-center h-full text-center relative z-10">
+        {Icon && (
+          <div className="mb-3 relative">
+            <Icon className="h-8 w-8 text-white animate-float-gentle" aria-hidden="true" />
+            <div className="absolute inset-0 blur-sm opacity-50">
+              <Icon className="h-8 w-8 text-current" aria-hidden="true" />
+            </div>
+          </div>
+        )}
         {size !== 'sm' && (
           <>
-            <h3 className="font-semibold text-white text-lg mb-1">{title}</h3>
+            <h3 className="font-semibold text-white text-lg mb-1 tracking-wide">
+              {title}
+            </h3>
             {description && (
-              <p className="text-white/70 text-sm mb-4">{description}</p>
+              <p className="text-white/70 text-sm mb-4 leading-relaxed">
+                {description}
+              </p>
             )}
           </>
         )}
         {children}
       </div>
+      
+      {/* Enhanced glass effect overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-white/5 rounded-lg pointer-events-none opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
     </Card>
   );
 });

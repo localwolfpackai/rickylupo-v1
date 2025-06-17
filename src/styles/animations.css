@@ -1,0 +1,200 @@
+
+/* Advanced Animation System */
+
+/* Spring-based keyframes */
+@keyframes spring-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05) translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes spring-out {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+}
+
+@keyframes bounce-gentle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes float-gentle {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+  66% {
+    transform: translateY(-5px) rotate(-1deg);
+  }
+}
+
+@keyframes slide-up-fade {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in-center {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Staggered animation utilities */
+.stagger-children > * {
+  animation-delay: calc(var(--stagger-delay, 0ms) + (var(--stagger-increment, 100ms) * var(--stagger-index, 0)));
+}
+
+/* Enhanced focus states */
+.focus-visible-enhanced {
+  outline: none;
+  position: relative;
+}
+
+.focus-visible-enhanced:focus-visible::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border: 2px solid var(--color-warmth-400);
+  border-radius: var(--radius-lg);
+  animation: pulse-ring 1.5s infinite;
+}
+
+/* Micro-interaction classes */
+.micro-bounce {
+  transition: transform var(--duration-fast) var(--ease-bounce);
+}
+
+.micro-bounce:active {
+  transform: scale(0.98);
+}
+
+.micro-lift {
+  transition: all var(--duration-normal) var(--ease-smooth);
+}
+
+.micro-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.micro-press {
+  transition: all var(--duration-fast) var(--ease-sharp);
+}
+
+.micro-press:active {
+  transform: translateY(1px) scale(0.99);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Gesture-based animations */
+@media (hover: hover) {
+  .hover-float:hover {
+    animation: float-gentle 3s ease-in-out infinite;
+  }
+}
+
+/* Loading states */
+.skeleton-loading {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.1) 25%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.1) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.blur-load {
+  filter: blur(20px);
+  transition: filter var(--duration-slow) var(--ease-smooth);
+}
+
+.blur-load.loaded {
+  filter: blur(0);
+}
+
+/* Performance-optimized animations */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform, opacity;
+}
+
+/* Reduced motion alternatives */
+@media (prefers-reduced-motion: reduce) {
+  .spring-in {
+    animation: slide-up-fade var(--duration-fast) var(--ease-smooth);
+  }
+  
+  .float-gentle,
+  .bounce-gentle,
+  .gradient-shift {
+    animation: none;
+  }
+  
+  .micro-lift:hover {
+    transform: none;
+    box-shadow: var(--shadow-md);
+  }
+}

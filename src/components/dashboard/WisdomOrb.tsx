@@ -33,10 +33,10 @@ export const WisdomOrb = () => {
         size="sm"
         floating={true}
         onClick={shareWisdom}
-        className="hover:scale-110 cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2"
+        className="hover:animate-float-gentle cursor-pointer group"
         tabIndex={0}
         role="button"
-        aria-label="Get a piece of dad's wisdom"
+        aria-label="Get a piece of dad's wisdom - opens dialog with inspirational quote"
         onKeyDown={(e) => {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
@@ -47,20 +47,25 @@ export const WisdomOrb = () => {
 
       <Dialog open={showWisdom} onOpenChange={setShowWisdom}>
         <DialogContent 
-          className="sm:max-w-lg backdrop-blur-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-white/10 shadow-2xl rounded-3xl focus:outline-none"
+          className="sm:max-w-lg card-premium bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-white/10 shadow-purple-glow rounded-3xl focus-trap"
           aria-labelledby="wisdom-title"
           aria-describedby="wisdom-content"
         >
-          <div className="text-center py-6">
-            <Lightbulb className="h-16 w-16 text-purple-400 mx-auto mb-6" aria-hidden="true" />
-            <h3 id="wisdom-title" className="text-2xl font-bold text-white mb-6">
+          <div className="text-center py-6 animate-spring-in">
+            <div className="relative mb-6 inline-block">
+              <Lightbulb className="h-16 w-16 text-purple-400 mx-auto animate-float-gentle" aria-hidden="true" />
+              <div className="absolute inset-0 blur-lg opacity-30">
+                <Lightbulb className="h-16 w-16 text-purple-400 mx-auto" aria-hidden="true" />
+              </div>
+            </div>
+            <h3 id="wisdom-title" className="text-2xl font-bold text-white mb-6 text-gradient-purple">
               Dad's Wisdom
             </h3>
-            <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20">
-              <p id="wisdom-content" className="text-lg text-white/90 italic leading-relaxed">
+            <div className="card-premium p-6 border border-white/20 shadow-purple-glow interactive-glow">
+              <p id="wisdom-content" className="text-lg text-white/90 italic leading-relaxed mb-4">
                 "{currentWisdom}"
               </p>
-              <p className="text-sm text-white/60 mt-4">- Dad, probably</p>
+              <p className="text-sm text-white/60">- Dad, probably</p>
             </div>
           </div>
         </DialogContent>

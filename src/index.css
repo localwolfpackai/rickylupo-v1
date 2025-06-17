@@ -1,4 +1,8 @@
 
+@import './styles/design-tokens.css';
+@import './styles/animations.css';
+@import './styles/glass-effects.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -57,79 +61,150 @@
   
   body {
     @apply bg-background text-foreground font-inter;
-    background: linear-gradient(135deg, #000000 0%, #1f1f1f 100%);
+    background: var(--gradient-hero-enhanced);
     font-display: swap;
     overflow-x: hidden;
+    scroll-behavior: smooth;
   }
   
   html {
     scroll-behavior: smooth;
   }
+
+  /* Improved font loading */
+  .font-playfair {
+    font-display: swap;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+  }
+
+  .font-inter {
+    font-display: swap;
+    font-feature-settings: 'cv11', 'ss01';
+    font-variant-numeric: oldstyle-nums;
+  }
 }
 
 @layer components {
-  /* Enhanced glassmorphic effects */
-  .glass-card {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  }
-
-  .glass-button {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .glass-button:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-  }
-
-  /* Enhanced touch targets */
-  .touch-target {
+  /* Enhanced interactive elements */
+  .interactive-element {
+    @apply focus-visible-enhanced gpu-accelerated micro-lift;
     min-height: 44px;
     min-width: 44px;
+    touch-action: manipulation;
   }
 
-  /* Optimized animations */
-  .smooth-hover {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  .button-premium {
+    @apply glass-button-premium interactive-element micro-press;
+    font-weight: 500;
+    letter-spacing: 0.025em;
   }
 
-  .smooth-hover:hover {
-    transform: translateY(-4px) scale(1.02);
+  .card-premium {
+    @apply glass-card-premium layered-glass;
+    animation: spring-in var(--duration-normal) var(--ease-spring);
   }
 
-  /* Focus indicators */
-  .focus-ring:focus {
-    @apply outline-none ring-2 ring-warmth-500 ring-offset-2 ring-offset-black;
+  /* Typography enhancements */
+  .heading-primary {
+    font-size: var(--font-size-6xl);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+    background: linear-gradient(135deg, #ffffff 0%, var(--color-warmth-300) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 40px rgba(245, 158, 11, 0.3);
   }
 
-  /* Scroll improvements */
-  .smooth-scroll {
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior: contain;
+  .heading-secondary {
+    font-size: var(--font-size-4xl);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: var(--color-warmth-300);
+  }
+
+  /* Enhanced scroll indicators */
+  .scroll-indicator {
+    @apply relative;
+  }
+
+  .scroll-indicator::after {
+    content: '';
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 2rem;
+    background: linear-gradient(to bottom, var(--color-warmth-400), transparent);
+    animation: bounce-gentle 2s infinite;
+  }
+
+  /* Loading optimizations */
+  .critical-above-fold {
+    will-change: auto;
+  }
+
+  .lazy-below-fold {
+    content-visibility: auto;
+    contain-intrinsic-size: 400px;
+  }
+
+  /* Enhanced focus management */
+  .focus-trap {
+    outline: none;
+  }
+
+  .focus-trap:focus-within {
+    outline: 2px solid var(--color-warmth-400);
+    outline-offset: 4px;
+  }
+
+  /* Mobile optimizations */
+  @media (max-width: 768px) {
+    .glass-card-premium {
+      backdrop-filter: var(--blur-md);
+    }
+    
+    .heading-primary {
+      font-size: var(--font-size-4xl);
+    }
+
+    .micro-lift:hover {
+      transform: none;
+    }
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .glass-card-premium {
+      background: rgba(0, 0, 0, 0.8);
+      border: 2px solid white;
+    }
+
+    .button-premium {
+      background: rgba(255, 255, 255, 0.9);
+      color: black;
+      border: 2px solid white;
+    }
+  }
+
+  /* Touch target optimization */
+  @media (pointer: coarse) {
+    .interactive-element {
+      min-height: 48px;
+      min-width: 48px;
+    }
   }
 }
 
 /* Performance optimizations */
-@media (max-width: 768px) {
-  .glass-card {
-    backdrop-filter: blur(15px);
-  }
-  
-  .font-playfair {
-    line-height: 1.1;
-  }
-}
-
-/* Reduce motion preferences */
 @media (prefers-reduced-motion: reduce) {
-  * {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -138,20 +213,20 @@
   html {
     scroll-behavior: auto;
   }
-}
 
-/* Loading optimizations */
-.image-loading {
-  background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
-  background-size: 200% 100%;
-  animation: loading-shimmer 1.5s infinite;
-}
-
-@keyframes loading-shimmer {
-  0% {
-    background-position: -200% 0;
+  .gradient-animated {
+    animation: none;
   }
-  100% {
-    background-position: 200% 0;
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
   }
 }
